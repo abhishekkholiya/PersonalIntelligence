@@ -1,0 +1,224 @@
+@media screen and (min-width: 769px) {
+    .container {
+      display: flex;
+      align-items: center;
+      
+      height: 100vh;
+      font-family: "Comfortaa", sans-serif;
+      background-color: var(--primary-color, black)
+  
+      
+    }
+    .left{
+        width: 70%;
+        height: 100%;
+        background:linear-gradient(180deg, #526EFF 0%, #C2A1EB 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .left_center{
+        display: flex;
+        flex-direction: column;
+    }
+    .left_text{
+        margin-top: 5rem;
+        font-size: 1.6rem;
+    }
+    .right{
+        width: 30%;
+        height: 100%;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+       
+    }
+    .right_header{
+        margin-top: 2rem;
+        margin-left: 1.5rem;
+        color: black;
+        font-size: 1.6rem;
+        font-weight: 500;
+    }
+    .left_center_header{
+        font-size: 7rem;
+    }
+    .left_center_subheader{
+        margin-left: 5px;
+        font-size: 1.5rem;
+        line-height: 1.8rem;
+    }
+    .right_center{
+        width: 100%;
+        height: 70%;
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+     
+        justify-content: center;
+        padding-top: 1.5rem;
+      
+       
+    }
+    .right_center_button{
+        width: 72%;
+        height: 10.5%;
+        background-color: #F2F2F2;
+        border: 0;
+        border-radius: 10px;
+        color: black;
+        cursor: pointer;
+    }
+    .right_center_button_div{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+    .right_center_button_div_text{
+        font-size: 1.4rem;
+        padding-right: 15px;
+        font-family: "Comfortaa", sans-serif;
+
+    }
+    .right_center_middle_text{
+        padding-top: 1.5rem;
+        font-size: 1.5rem;
+        color: black;
+    }
+    .profilePicture_Div{
+      
+        border: 0;
+        background: none;
+      
+    }
+    .profilePicture{
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        background-size: 50% 100%; /* Fill the content box entirely */
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      
+      
+    
+    }
+    .fileInput{
+        display: none;
+    }
+    .emailInput{
+        margin-top: 20px;
+        width: 72%;
+        height: 9%;
+        border-radius: 1ch;
+        border: 0;
+        background-color: white;
+        border: 1px solid #555869;
+        padding-left: 15px;
+        font-size: 1.2rem;
+        color: black;
+        font-family: "Comfortaa", sans-serif;
+        
+        
+    }
+
+    .emailInput::placeholder{
+        color: #555869;
+    }
+    .dropDown{
+    
+        width: 72%;
+        height: 10%;
+        margin-top: 20px;
+      
+        
+    }
+    .nextDiv{
+        margin-top: 40px;
+        width: 72%;
+        height: 9%;
+        display: flex;
+       
+        align-items: flex-start;
+        
+    }
+    .nextButton{
+        float: right;
+        height: 100%;
+        width: 100%;
+        background-color: #5770FD;
+        border: 0;
+        border-radius: 12px;
+        font-size: 1.2rem;
+        font-family: "Comfortaa", sans-serif;
+
+    }
+
+    .right_center_button_two{
+        width: 72%;
+        height: 8%;
+        background:linear-gradient(90deg, #4637F9 0%, #746AEA 100%);
+        border: 0;
+        border-radius: 10px;
+        color: white;
+        cursor: pointer;
+        margin-top: 40px;
+    }
+    .right_center_bottom{
+        margin-top: 40px;
+        display: flex;
+        flex-direction: row;
+    }
+    .right_center_bottom_text{
+        color: black;
+        font-weight: 400;
+        font-size: 1.2rem;
+    }
+    .right_center_bottom_link{
+        color: #00F;
+        padding-left: 10px;
+        font-weight: 400;
+        font-size: 1.2rem;
+    }
+    
+    .content {
+        flex-grow: 1;
+        overflow-y: auto;
+        padding: 20px;
+        min-width: 52%;
+        height: 100%;
+       
+        
+      }
+   
+}
+
+.speak_button{
+    margin: auto;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    border: none;
+    animation: pulse 1.2s infinite;
+    background-color: white;
+    color: black;
+    font-size: 1.2rem;
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.4);
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0px 8px 12px purple;
+     
+    }
+    50% {
+      transform: scale(1.2);
+     
+      box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.4);
+    }
+  }
+  
