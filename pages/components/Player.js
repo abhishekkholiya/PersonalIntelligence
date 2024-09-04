@@ -24,15 +24,8 @@ const Player = () => {
   // };
   useEffect(() => {
 
-    
-
-    // const getToken = async ()=>{
-    //   let newToken = await refreshAccessToken("AQCGnOX3ULmEZX7Vfoe6cc6p-knDb5c2zRAynOMHSU_9CNBfJTBfDhyCvG6yPIjHlRF_2ArrJjx67W_SY3miIw5gEfv2ByZCUFEzp0p5n3EaMvAgBSkf7zNk6YWfCaXFl98");
-    //   accessToken = newToken;
-    // }
+  
     if (accessToken) {
-
-      // getToken();
    
       const script = document.createElement('script');
       script.src = 'https://sdk.scdn.co/spotify-player.js';

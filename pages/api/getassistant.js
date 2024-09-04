@@ -30,22 +30,7 @@ export default function handler(req, res) {
                }
             }
 
-            // if(query.toLowerCase().startsWith('pause') || query.toLowerCase().startsWith('stop')){
-            //     // let accessToken  = 'BQD0tEbjGpJge_FlYuGCe5l_0oOjwBTZY2yB8JbUDQguHLLyHa1Mx3hLBTbkeDJfn7f16Z5B6nKQ5AQ9PhGj4n8_DPfIWAbUnFMBzvCQI4SHE8uL3CFVebQgk047Z3soSjzNrkSB_3qPDGch8RzLnFMdntoNArcweqRoPijIw8ZcWiBwAnC6ZiBAuYKhkq6WFGZ2Q3RzR-v-5Vw5IG6n7loATkRMrA';
-            //     const response = await fetch('https://api.spotify.com/v1/me/player/pause', {
-            //         method: 'PUT',
-            //         headers: {
-            //             'Authorization': `Bearer ${accessToken}`,
-            //             'Content-Type': 'application/json',
-            //         },
-            //     });
-        
-            //     if (!response.ok) {
-            //         const errorBody = await response.text();
-            //         throw new Error(`Failed to pause track, status: ${response.status}, response: ${errorBody}`);
-            //     }
-            //     return res.status(200).json({ message: "paused" });
-            // }
+          
 
             
 
