@@ -211,17 +211,7 @@ export default async function handler(req, res) {
       await resumeSong();
     }
 
-      // switch(action){
-      //   case "music":
-      //     await playSong(query);
-      //   case 'music/resume':
-      //     await resumeSong();
-      //   case 'music/pause': 
-      //     await pauseSong();
-        
-      //   default: 
-      //     console.log("unknown query");
-      // }
+    
       
   
 }

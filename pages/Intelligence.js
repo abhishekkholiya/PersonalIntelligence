@@ -95,9 +95,7 @@ if (SpeechRecognition) {
 
       <Sidebar/>
        
-        {/* <button onClick={speech} className={styles.speak_button}>
-        
-        </button> */}
+     
 
          
             <Assistant/>

@@ -61,12 +61,14 @@ export default function SignUp (){
   useEffect(()=>{
     const getUserData = async ()=>{
         console.log("trying to fetch user");
-        let response = await fetch(`/api/getuser?userUID=${user.uid}`);
-        if(response.ok){
-          let userData = await response.json();
-          if(userData){
-            router.push("/Intelligence");
-          }
+        if(user !== null){
+            let response = await fetch(`/api/getuser?userUID=${user.uid}`);
+            if(response.ok){
+                let userData = await response.json();
+                if(userData){
+                    router.push("/Intelligence");
+                }
+            }
         }
       }
       getUserData();

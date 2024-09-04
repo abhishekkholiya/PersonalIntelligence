@@ -7,21 +7,7 @@ const Player = () => {
   const [trackData,setTrackData] = useState(null);
   let accessToken = typeof window !== 'undefined' ? localStorage.getItem('spotifyAccessToken') : null;
 
-  // const refreshAccessToken = async (refreshToken) => {
-  //   const response = await fetch('https://accounts.spotify.com/api/token', {
-  //       method: 'POST',
-  //       headers: {
-  //           'Content-Type': 'application/x-www-form-urlencoded',
-  //       },
-  //       body: new URLSearchParams({
-  //           grant_type: 'refresh_token',
-  //           refresh_token: refreshToken,
-  //           client_id:'9ae550479915439097e1d643ee6caa79',
-  //           client_secret: 'd39ce1e244c5456db991e50199035700',
-  //       }),
-        
-  //   });
-  // };
+
   useEffect(() => {
 
   
