@@ -70,6 +70,16 @@ export default function handler(req, res) {
                             
                         ${responseText}` });
                 }
+
+                if(data.intent === 'reminder'){
+
+                    res.status(200).json({ message: `sure i will remind you for ${data.reminder}`,reminder:data.reminder,timing:data.timing,type:'reminder' });
+                    // setTimeout(()=>{
+                    //     const utterance = new SpeechSynthesisUtterance(data.reminder);
+                    //     utterance.lang = 'en-US';
+                    //     return speechSynthesis.speak(utterance);
+                    // },[data.timing]);
+                }
             }
 
 

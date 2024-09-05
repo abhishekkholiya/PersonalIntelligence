@@ -12,7 +12,7 @@ export default function Assistant (){
     const [selectedMode,setSelectedMode] = useState("voice");
     const [transcript,setTranscript] = useState("Hey jarvis");
     const [userData,setUserData] = useState(null);
-    const [accessToken,setAccessToken] = useState("");
+    const [accessToken,setAccessToken] = useState(" ");
     let thread,assistant;
    
 
@@ -36,17 +36,19 @@ export default function Assistant (){
       console.log("new real token is here" + data.access_token);
       
       return data.access_token;
-  };
+    };
 
     useEffect(()=>{
       const getUserData = async ()=>{
         console.log("trying to fetch user");
-        let response = await fetch(`/api/getuser?userUID=${user.uid}`);
-        if(response.ok){
-          let userData = await response.json();
-          setUserData(userData.user);
-          setAccessToken(userData.user.spotify_access);
-          console.log(userData);
+        if(user){
+            let response = await fetch(`/api/getuser?userUID=${user.uid}`);
+            if(response.ok){
+              let userData = await response.json();
+              setUserData(userData.user);
+              setAccessToken(userData.user.spotify_access);
+              console.log(userData);
+            }
         }
       }
       getUserData();
@@ -81,9 +83,26 @@ export default function Assistant (){
                   let data = await response.json();
                   if(response.ok){
                     recognition.stop();
-                      const utterance = new SpeechSynthesisUtterance(data.message);
-                      utterance.lang = 'en-US';
-                      return speechSynthesis.speak(utterance);
+                    console.log("yes brother");
+                      // const utterance = new SpeechSynthesisUtterance(data.message);
+                      // utterance.lang = 'en-US';
+                      //  speechSynthesis.speak(utterance);
+                       console.log(data);
+                        const utterance = new SpeechSynthesisUtterance(data.message);
+                        utterance.lang = 'en-US';
+                        speechSynthesis.speak(utterance);
+                       if(data.type === 'reminder'){
+
+                          setTimeout(()=>{
+                            const newutterance = new SpeechSynthesisUtterance(data.reminder);
+                            newutterance.lang = 'en-US';
+                            speechSynthesis.speak(newutterance);
+                            
+
+                          },data.timing)
+                       }
+
+                   
                   }
               
                 
@@ -120,7 +139,7 @@ export default function Assistant (){
             // setQuery('');
       
              eventSource.onmessage = (event) => {
-      const data = event.data;
+            const data = event.data;
       if (data === '[DONE]') {
         setTyping(false);
         eventSource.close();
@@ -211,38 +230,28 @@ export default function Assistant (){
                 <div className={styles.chat} >
                     <div className={styles.chat_topDiv}>
                         <div className={styles.voice_div}>
-                          <button className={selectedMode === 'voice' ? styles.top_button_selected : styles.top_button}>
+                          <button className={selectedMode === 'voice' ? styles.top_button_selected : styles.top_button} onClick={()=>{setSelectedMode("voice")}}>
                             <p>Voice</p>
                           </button>
                         </div>
 
                         <div className={styles.chat_div}>
-                          <button className={selectedMode === 'chat' ? styles.top_button_selected : styles.top_button}>
+                          <button className={selectedMode === 'chat' ? styles.top_button_selected : styles.top_button} onClick={()=>{setSelectedMode("chat")}}>
                             <p>Chat</p>
                           </button>
                         </div>
                        
                     </div>
-                    {selectedMode ===  'voice' ?
+
                     
+                    {selectedMode ===  'voice' ?
+
                             <>
                                 
                               <div className={styles.chat_middleDiv}>
                                       
                                   <div className={styles.chat_middleDiv_body}>
-                                      {/* <img src='/sparkle.png' className={styles.assistantLogo} width={30} height={30}/>
-                                      <div className={styles.chat_middleDiv_subbody}>
-                                      {messages.length > 0 && (
-                                            <p>{messages[messages.length - 1]}</p> // Show the last concatenated message
-                                      )
-                                    
-                                      }
-                                      {messages.length<= 0 && typing === false && (
-                                          <p>Hello there</p>
-                                      )}
-                                              
-                                              {typing && <p>Assistant is typing...</p>}
-                                      </div> */}
+                                      
 
                                         <button onClick={speech} className={styles.speak_button}>
                                                 
@@ -293,7 +302,8 @@ export default function Assistant (){
                     }
                       
 
-                </div>}
+                </div>
+                }
                 <button className={styles.container} onClick={()=>{setShowChat(!showChat);}}>
                      <img src='/sparkle.png' className={styles.image} width={25} height={25}/>
                 </button>

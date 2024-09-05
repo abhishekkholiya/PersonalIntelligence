@@ -38,15 +38,14 @@
     }
     .chat_topDiv{
         width: 100%;
-        height: 8.5%;
-        background-color:transparent ;
+        height: 5vh;
+        background-color:transparent;
         border-top-left-radius: 15px;
         border-top-right-radius: 15px;
         display: flex;
         flex-direction: row;
         align-items:last baseline;
-       
-        
+
     }
     .chat_topDiv_left{
         width: auto;
@@ -76,6 +75,8 @@
        border-radius: 12px;
        border: none;
        background-color:transparent;
+
+       cursor: pointer;
      
     }
     .top_button_selected{
@@ -120,7 +121,7 @@
     }
     .chat_bottomDiv{
         width: 100%;
-        height: 10.5%;
+        height: 14%;
         background-color:#171717 ;
         display: flex;
         align-items: center;

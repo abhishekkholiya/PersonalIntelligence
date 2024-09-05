@@ -9,12 +9,14 @@ export default function Sidebar (){
     const [userData,setUserData] = useState(null);
     useEffect(()=>{
         const getUserData = async ()=>{
-            console.log("trying to fetch user");
-            let response = await fetch(`/api/getuser?userUID=${user.uid}`);
-            if(response.ok){
-              let userData = await response.json();
-              setUserData(userData.user);
-              console.log(userData);
+            if(user){
+                    console.log("trying to fetch user");
+                    let response = await fetch(`/api/getuser?userUID=${user.uid}`);
+                    if(response.ok){
+                    let userData = await response.json();
+                    setUserData(userData.user);
+                    console.log(userData);
+                    }
             }
           }
           getUserData();
@@ -37,6 +39,11 @@ export default function Sidebar (){
                             
                                 <img src='/home.png' width={35} height={35}/>
                             </Link>
+
+                            <Link href={'/Intelligence'} className={styles.Island_page}>
+                            
+                                    <img src='/albums.png' width={30} height={30}/>
+                             </Link>
                         </div>
 
                         <div>

@@ -9,7 +9,9 @@ import Player from "./components/Player";
 import { Speech } from "openai/resources/audio/speech";
 import { useAuthContext } from "@/utils/AuthContext";
 import Userbar from './components/Userbar';
-import Sidebar from './components/Sidebar'
+import Sidebar from './components/Sidebar';
+
+import { useRouter } from "next/router";
 
 
 const inter = Inter({ subsets: ["latin"] }); 
@@ -19,14 +21,19 @@ const accessToken =process.env.ACCESS_TOKEN;
 export default function Intelligence() {
 
   const {user} = useAuthContext();
+  const router = useRouter();
 
   useEffect(()=>{
     const getUserData = async ()=>{
-      console.log("trying to fetch user");
-      let response = await fetch(`/api/getuser?userUID=${user.uid}`);
-      if(response.ok){
-        let userData = await response.json();
-        console.log(userData);
+      if(user){
+          console.log("trying to fetch user");
+          let response = await fetch(`/api/getuser?userUID=${user.uid}`);
+          if(response.ok){
+            let userData = await response.json();
+            console.log(userData);
+          }
+      }else{
+        router.push("/Signup");
       }
     }
     getUserData();

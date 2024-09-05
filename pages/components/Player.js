@@ -1,17 +1,39 @@
 import { useEffect, useState } from 'react';
 import styles from '@/styles/webPlayer.module.css';
 
+import { useAuthContext } from '@/utils/AuthContext';
+
 const Player = () => {
   const [player, setPlayer] = useState(null);
   const [deviceId, setDeviceId] = useState(null);
   const [trackData,setTrackData] = useState(null);
-  let accessToken = typeof window !== 'undefined' ? localStorage.getItem('spotifyAccessToken') : null;
+  const [accessToken,setAccessToken] = useState(null);
+  const {user} = useAuthContext();
+  //let accessToken = typeof window !== 'undefined' ? localStorage.getItem('spotifyAccessToken') : "BQASewVRKolpYTiNVk8m1XUDMMmO6BLbCmvbxc8smIxuJQUI8z3X_F1PuxQiH7kxFPRGl1Ceq4aRnQtGkG18hcmMWJ8madPF9u4R_YBkfcT6IKCfbFkCA_6NeTfj2McXeemKiMBO8bP8g191H_v_YZeBfVco-yKAJzT2Ycnn6OcbcfaxWhvt-z0Dg5dva1iwKFfN9DhKadCWRgx3oxVPPGfBIyx-JQ";
 
+
+  useEffect(()=>{
+    const getUserData = async ()=>{
+        if(user){
+          console.log("trying to fetch user");
+          let response = await fetch(`/api/getuser?userUID=${user.uid}`);
+          if(response.ok){
+            let userData = await response.json();
+          
+            console.log(userData.user.spotify_access);
+            setAccessToken(userData.user.spotify_access);
+          }
+        }
+      }
+      getUserData();
+},[]);
 
   useEffect(() => {
 
   
     if (accessToken) {
+
+    
    
       const script = document.createElement('script');
       script.src = 'https://sdk.scdn.co/spotify-player.js';
@@ -37,8 +59,7 @@ const Player = () => {
         });
 
         spotifyPlayer.addListener('initialization_error', ({ message }) => {
-         
-          // console.error('Failed to initialize', message);
+           console.error('Failed to initialize', message);
         });
 
         spotifyPlayer.addListener('authentication_error', ({ message }) => {
@@ -55,22 +76,23 @@ const Player = () => {
         });
 
 
-        spotifyPlayer.addListener('player_state_changed', state => {
-          if (state) {
-            const currentTrack = state.track_window.current_track;
-            console.log('Currently Playing:', currentTrack);
+        // spotifyPlayer.addListener('player_state_changed', state => {
+        //   console.log('changed' + state)
+        //   if (state) {
+        //     const currentTrack = state.track_window.current_track;
+        //     console.log('Currently Playing:', currentTrack);
           
-            if ( currentTrack !== null && currentTrack.album && currentTrack.album.images.length >= 1){
-                const albumArt = currentTrack.album.images[0].url; // Album art URL
-                const trackName = currentTrack.name; // Track name
-                const artistName = currentTrack.artists.map(artist => artist.name).join(', '); // Artist name(s)
-                console.log('Album Art:', albumArt);
-                console.log('Track Name:', trackName);
-                console.log('Artist Name:', artistName);
-                setTrackData({albumArt:albumArt,trackName:trackName,artistName:artistName})
-            }
-          }
-        });
+        //     if ( currentTrack.album.images.length >= 1){
+        //         const albumArt = currentTrack.album.images[0].url; // Album art URL
+        //         const trackName = currentTrack.name; // Track name
+        //         const artistName = currentTrack.artists.map(artist => artist.name).join(', '); // Artist name(s)
+        //         console.log('Album Art:', albumArt);
+        //         console.log('Track Name:', trackName);
+        //         console.log('Artist Name:', artistName);
+        //         setTrackData({albumArt:albumArt,trackName:trackName,artistName:artistName})
+        //     }
+        //   }
+        // });
         
         spotifyPlayer.connect();
         setPlayer(spotifyPlayer);
@@ -124,16 +146,39 @@ const Player = () => {
           console.error('Failed to perform playback', message);
         });
 
+        spotifyPlayer.addListener('player_state_changed', state => {
+          console.log('changed' + state);
+              if (state && state.track_window && state.track_window.current_track) {
+                const currentTrack = state.track_window.current_track;
+              
+            
+                if (currentTrack !== null && currentTrack.album && currentTrack.album.images &&  currentTrack.album.images.length > 0 && currentTrack.album.images[0].url){
+                    const albumArt = currentTrack.album.images[0].url; // Album art URL
+                    const trackName = currentTrack.name; // Track name
+                    const artistName = currentTrack.artists.map(artist => artist.name).join(', '); // Artist name(s)
+                    console.log('Album Art:', albumArt);
+                    console.log('Track Name:', trackName);
+                    console.log('Artist Name:', artistName);
+                    setTrackData({albumArt:albumArt,trackName:trackName,artistName:artistName})
+                }else {
+                  console.log('No album art or track data available');
+                }
+              }else {
+                console.log('No track playing or track data unavailable');
+              } 
+        });
+
         
         spotifyPlayer.connect();
         setPlayer(spotifyPlayer);
-        console.log(spotifyPlayer);
+      
       };
     }
   };
 
   initializePlayer();
 }, [accessToken]);
+
 
 
   const playSong = async (query) => {

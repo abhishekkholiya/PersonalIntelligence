@@ -24,7 +24,7 @@ export default function handler(req, res) {
                 model: 'gpt-4', // Use the appropriate model
                 messages: [
                     { role: 'system', content: "You are a helpful assistant named Jarvis created by Abhishek Kholiya." },
-                    { role: 'user', content:`Classify the given query in play music, pause music, resume msuic,  weather or general. note: answer in only one word
+                    { role: 'user', content:`Classify the given query in play music, pause music, resume msuic,  weather, reminder or general. note: answer in only one word
                         query: ${data}
                        ` 
                     }
@@ -61,7 +61,7 @@ export default function handler(req, res) {
             model: 'gpt-4', // Use the appropriate model
             messages: [
                 { role: 'system', content: "You are a helpful assistant named Jarvis created by Abhishek Kholiya." },
-                { role: 'user', content:`Extract the song name out from the query. note: answer the full song name only (if there is no song in the query just give the singer name)
+                { role: 'user', content:`${data.inputs.question}
                     query: ${data.inputs.context}
                    `  }
             ],
@@ -100,7 +100,7 @@ export default function handler(req, res) {
     query(request).then((response)=>{
         console.log("response" + response);
         if(response && response.toLowerCase() === 'play music'){
-            answer({inputs:{question:"what is the full song name?",context:request}}).then((response) => {
+            answer({inputs:{question:"Extract the song name out from the query. note: answer the full song name only (if there is no song in the query just give the singer name)",context:request}}).then((response) => {
                                      console.log("here" + JSON.stringify(response));
                                     res.status(201).json({message:response,intent:"play music"});
                     });
@@ -112,6 +112,24 @@ export default function handler(req, res) {
             res.status(201).json({message:response,intent:"resume music"});
         }else if(response && response.toLowerCase() === 'weather'){
             res.status(201).json({message:request,intent:"weather"});
+        }else if(response && response.toLowerCase() === 'reminder'){
+
+            answer({inputs:{question:"Extract what's the reminder about from the query and time to remind in milliseconds. example: reminder: brush teeth  time: 6000 ms   (only give the reminder name and time no extra info)",context:request}}).then((response) => {
+                console.log("here" + JSON.stringify(response));
+
+                            const lines = response.split('\n'); // Split the response into lines
+                            const reminderText = lines[0].split(': ')[1].trim(); // Get the reminder after "Reminder:"
+                            const timeText = lines[1].split(': ')[1].trim(); // Get the time after "Time:"
+
+                            // Converting the time to a number (remove "ms" and convert to integer)
+                            const reminderTimeInMs = parseInt(timeText.replace(' ms', ''));
+
+                            // Output the extracted values
+                            console.log('Reminder:', reminderText); // "Brush Teeth"
+                            console.log('Time (ms):', reminderTimeInMs); // 300000
+                                res.status(201).json({message:response,intent:"reminder",reminder:reminderText,timing:reminderTimeInMs});
+                });
+
         }else{
             res.status(201).json({message:request,intent:"general"});
         }
