@@ -1,4 +1,4 @@
-#Personal Intelligence ✨ for your browser  
+# Personal Intelligence ✨ for your browser  
   
 
 It's name is Jarvis and it can play music, set reminders, find information on any topic and other things.
@@ -23,27 +23,32 @@ It's name is Jarvis and it can play music, set reminders, find information on an
 - FIREBASE_API_KEY  
 
 ## Instructions to run the project  
-First of all take deep breath and live in the moment for a minute,  
-Now that you are done, let's get started!  
+  First of all take deep breath and live in the moment for a minute,  
+  Now that you are done, let's get started!  
 
-- Step 1: Clone this repo   
-run the command below in your terminal  
-``` 
-git clone "repo link"
-```  
-- Step 2: run npm install  
-cd into the project directory and run
-```
-npm install
-```  
-- Step 3: Adding all the environment variables  
-Now this is a bit lengthy part, so have some patience!  
+## Step 1: Clone this repo   
+  
+  Run the command below in your terminal  
+  ``` 
+  git clone "repo link"
+  ```    
+   
+## Step 2: run npm install  
+  
+  Cd into the project directory and run  
+  ```
+  npm install
+  ```  
+  
+## Step 3: Adding all the environment variables  
+  
+  Now this is a bit lengthy part, so have some patience!  
 
-> create a .env file
+  > create a .env file
   
   - go to [open.ai website]("https://platform.openai.com/docs/assistants/overview") and create an api key (OPENAI_KEY),
     navigate to dashboard and create a new assistant and get the assistant's id (ASSISTANT_ID)  
-    > [!Note]   
+    > [!Note]
     > you will need to add credits minimum $5 dollars to use the open ai api (or you can wait for our free version of jarvis to launch)  
    
  - go to [mongodb]("mongodb.com") and sign up,  
@@ -59,12 +64,14 @@ Now this is a bit lengthy part, so have some patience!
     
 -  go to [spotify developer](https://developer.spotify.com/) website and sign up,
    then get an api key and access key (ACCESS_KEY) you will later get the refresh token
-
-- Step 4: Run the code!  
-run this command  
-```
-  npm run dev  
-```  
+  
+## Step 4: Run the code!  
+  
+  Run this command  
+  ```
+    npm run dev  
+  ```  
+    
 the development server will start and you will be able to use jarvis at localhost:3000  (or whatever port is available)  
   
 Hopefully, you are reached to this point, now you can sign up in the jarvis   
