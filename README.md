@@ -43,7 +43,7 @@ Now this is a bit lengthy part, so have some patience!
   
   - go to [open.ai website]("https://platform.openai.com/docs/assistants/overview") and create an api key (OPENAI_KEY),
     navigate to dashboard and create a new assistant and get the assistant's id (ASSISTANT_ID)  
-    > [!Note] 
+    > [!Note]   
     > you will need to add credits minimum $5 dollars to use the open ai api (or you can wait for our free version of jarvis to launch)  
    
  - go to [mongodb]("mongodb.com") and sign up,  
