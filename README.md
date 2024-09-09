@@ -1,40 +1,81 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+#Personal Intelligence ✨ for your browser  
+  
 
-## Getting Started
+It's name is Jarvis and it can play music, set reminders, find information on any topic and other things.
 
-First, run the development server:
+## Tech Stack  
+- Next js
+- MongoDB & Firebase (for Authentication)
+- Open AI Gpt 4-0 Model
+- Aws s3 bucket
+  
+## environment variables 
+- OPENAI_KEY
+- ASSISTANT_ID
+- CLIENT_ID
+- CLIENT_SECRET
+- ACCESS_TOKEN
+- FIREBASE_API_ID
+- NEXT_PUBLIC_MONGODB_URI  
+- NEXT_PUBLIC_ACCESS_KEY
+- NEXT_PUBLIC_SECRET_KEY
+- REFRESH_TOKEN
+- FIREBASE_API_KEY  
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Instructions to run the project  
+First of all take deep breath and live in the moment for a minute,  
+Now that you are done, let's get started!  
+
+- Step 1: Clone this repo   
+run the command below in your terminal  
+``` 
+git clone "repo link"
+```  
+- Step 2: run npm install  
+cd into the project directory and run
 ```
+npm install
+```  
+- Step 3: Adding all the environment variables  
+Now this is a bit lengthy part, so have some patience!  
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> create a .env file
+  
+  - go to [open.ai website]("https://platform.openai.com/docs/assistants/overview") and create an api key (OPENAI_KEY),
+    navigate to dashboard and create a new assistant and get the assistant's id (ASSISTANT_ID)  
+    > [!Note] 
+    > you will need to add credits minimum $5 dollars to use the open ai api (or you can wait for our free version of jarvis to launch)  
+   
+ - go to [mongodb]("mongodb.com") and sign up,  
+   create a new mongodb cluster with the free tier and get the mongodb URI (NEXT_PUBLIC_MONGODB_URI)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+ - go to [firebase]("https://firebase.google.com/") and sign up,
+   we are using firebase for authentication, so create a new project in firebase and then select register a web app  
+   after that you have to copy the code provided by firebase and delete the code in (utils/firebase.js) and paste your new code.  
+  
+-  go to [AWS]("https://aws.amazon.com/") and sign up,
+   then head over to s3 and create a bucket, make sure to set bucket rules to allow traffic from anywhere,
+   get the access key (NEXT_PUBLIC_ACCESS_KEY) and secret key (NEXT_PUBLIC_SECRET_KEY)
+    
+-  go to [spotify developer](https://developer.spotify.com/) website and sign up,
+   then get an api key and access key (ACCESS_KEY) you will later get the refresh token
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- Step 4: Run the code!  
+run this command  
+```
+  npm run dev  
+```  
+the development server will start and you will be able to use jarvis at localhost:3000  (or whatever port is available)  
+  
+Hopefully, you are reached to this point, now you can sign up in the jarvis   
+and an account will be created in the mongodb and   
+then you can connect your spotify by clicking on the spotify icon   
+and play music using jarvis!  
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+If you need help setting it up, join our (discord server)[https://discord.gg/DcZmxMsfjb] I or the people there will help you :)  
+  
+Thanks,  
+Happy coding!
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
