@@ -98,9 +98,7 @@
         border-radius: 50%;
         border: 1px solid white;
     }
-    .assistantLogo{
-        border-radius: 50%;
-    }
+   
     .assistantName{
         margin-left: 0.8rem;
         color: white;
@@ -180,6 +178,30 @@
         
     }
 
+    .assistantLogo{
+        border-radius: 50%;
+    }
+
+    
+    .chat_responseDiv_subbody{
+        margin-left: 0.5rem;
+        height: 100%;
+        min-width:auto;
+        max-width: 80%;
+        border: 1px solid white;
+        text-align: left;
+        font-size: 0.9rem;
+        line-height: 1.4rem;
+        padding: 8px;
+        border-radius: 10px;
+        background-color: #419C70;
+    }
+
+
+
+
+    
+
     .speak_button{
         margin: auto;
         width: 200px;
@@ -213,6 +235,29 @@
         width: 100%;
         
       }
+
+
+      .chat_responseDiv{
+        width: 100%;
+        height: 76%;
+        background-color: transparent;
+        overflow: auto;
+       
+    }
+
+    .chat_responseDiv_body{
+        margin-top: 15px;
+        width: 80%;
+    
+        margin-left: 1rem;
+        margin-top: 1rem;
+        border-radius: 10px;
+        color: white;
+        display: flex;
+        flex-direction: row;
+    }
+
+
       
 }
 @media screen and (max-width:769px){

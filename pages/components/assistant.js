@@ -135,39 +135,48 @@ export default function Assistant (){
         // const transcript = event.results[event.results.length - 1][0].transcript.trim();
         // console.log("You said:", transcript);
         //const response = await fetch(`/api/getassistant?query=${String(transcript)}&token=${accessToken}&deviceID=${deviceID}`);
-            const eventSource = new EventSource(`/api/getassistant?query=${String(query)}&token=${accessToken}&deviceID=${deviceID}`);
+            const eventSource = await  fetch(`/api/getassistant?query=${String(query)}&token=${accessToken}&deviceID=${deviceID}`);
+            if(eventSource.ok){
+              const data = await eventSource.json();
+              setTyping(false);
+              setMessages(prev=>[...prev, data.message]);
+            }else{
+              setTyping(true);
+            }
             // setQuery('');
       
-             eventSource.onmessage = (event) => {
-            const data = event.data;
-      if (data === '[DONE]') {
-        setTyping(false);
-        eventSource.close();
+    //          eventSource.onmessage = (event) => {
+    //         const data = event.data;
+    //   // if (data === '[DONE]') {
+    //   //   setTyping(false);
+    //   //   eventSource.close();
        
-        setMessages(prev => [...prev, fullMessage]);
+    //   //   setMessages(prev => [...prev, fullMessage]);
       
-      } else if (data === '[ERROR]') {
-        setTyping(false);
-        setMessages(prev => [...prev, "An error occurred."]);
-        eventSource.close();
-      } else {
-        try {
-          const parsedData = JSON.parse(data);
-          if (parsedData.type === 'textCreated' || parsedData.type === 'textDelta') {
+    //   // } else if (data === '[ERROR]') {
+    //   //   setTyping(false);
+    //   //   setMessages(prev => [...prev, "An error occurred."]);
+    //   //   eventSource.close();
+    //   // } else {
+    //   //   try {
+    //   //     const parsedData = JSON.parse(data);
+    //   //     if (parsedData.type === 'textCreated' || parsedData.type === 'textDelta') {
           
-            if(parsedData.textDelta){
-                fullMessage += parsedData.textDelta.value  ;
+    //   //       if(parsedData.textDelta){
+    //   //           fullMessage += parsedData.textDelta.value  ;
           
-                // setMessages(prev => [...prev, parsedData.textDelta.value || parsedData.text.value]);
+    //   //           // setMessages(prev => [...prev, parsedData.textDelta.value || parsedData.text.value]);
 
               
-            }
-          }
-        } catch (error) {
-          console.error('Error parsing message:', error);
-        }
-      }
-    };
+    //   //       }
+    //   //     }
+    //   //   } catch (error) {
+    //   //     console.error('Error parsing message:', error);
+    //   //   }
+    //   // }
+
+
+    // };
 
     eventSource.onerror = (error) => {
       setTyping(false);
@@ -177,7 +186,7 @@ export default function Assistant (){
   
 
       
-            setTyping(true);
+            // setTyping(true);
       
             return () => {
               eventSource.close();
@@ -270,24 +279,26 @@ export default function Assistant (){
                         :
                   
                           <>           
-                                  <div className={styles.chat_middleDiv}>
-                                  
-                                    <div className={styles.chat_middleDiv_body}>
-                                        <img src='/sparkle.png' className={styles.assistantLogo} width={30} height={30}/>
-                                        <div className={styles.chat_middleDiv_subbody}>
-                                        {messages.length > 0 && (
-                                              <p>{messages[messages.length - 1]}</p> // Show the last concatenated message
-                                        )
-                                      
-                                        }
-                                        {messages.length<= 0 && typing === false && (
-                                            <p>Hello there</p>
-                                        )}
-                                                
-                                                {typing && <p>Assistant is typing...</p>}
-                                        </div>
-                                    </div>
-                                    </div>
+
+                              <div className={styles.chat_responseDiv}>
+                      
+                                      <div className={styles.chat_responseDiv_body}>
+                                          <img src='/sparkle.png' className={styles.assistantLogo} width={30} height={30}/>
+                                          <div className={styles.chat_responseDiv_subbody}>
+                                          {messages.length > 0 && (
+                                                <p>{messages[messages.length - 1]}</p> // Show the last concatenated message
+                                          )
+                                        
+                                          }
+                                          {messages.length<= 0 && typing === false && (
+                                              <p>Hello there</p>
+                                          )}
+                                                  
+                                                  {typing && <p>Assistant is typing...</p>}
+                                          </div>
+                                      </div>
+                              </div>  
+
                                 <div className={styles.chat_bottomDiv}>
                                     <div className={styles.chat_bottomDiv_textInput}>
                                       <input type='text' className={styles.textInput} onChange={onQueryChange} placeholder='Ask me anything' onKeyPress={handleKeyPress} value={query}/>
