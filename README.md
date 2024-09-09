@@ -72,7 +72,7 @@ and an account will be created in the mongodb and
 then you can connect your spotify by clicking on the spotify icon   
 and play music using jarvis!  
 
-If you need help setting it up, join our (discord server)[https://discord.gg/DcZmxMsfjb] I or the people there will help you :)  
+If you need help setting it up, join our [discord server](https://discord.gg/DcZmxMsfjb) I or the people there will help you :)  
   
 Thanks,  
 Happy coding!
